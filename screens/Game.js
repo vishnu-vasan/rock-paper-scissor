@@ -29,10 +29,10 @@ const Game = (props) => {
   };
 
   const win = () => {
-    if (player1Score === props.maxScore) {
+    if (player1Score === props.maxScore - 1) {
       alert(props.player1 + " wins!!!");
     }
-    if (player2Score === props.maxScore) {
+    if (player2Score === props.maxScore - 1) {
       alert(props.player2 + " wins!!!");
     }
   };
@@ -135,12 +135,12 @@ const styles = StyleSheet.create({
   },
   circle: {
     borderRadius: 75,
-    width: 150,
-    height: 150,
+    width: 130,
+    height: 130,
     backgroundColor: "#87ceeb",
     justifyContent: "center",
     alignItems: "center",
-    marginLeft: Dimensions.get("window").width * 0.3,
+    marginLeft: Dimensions.get("window").width * 0.23,
     marginTop: -90,
   },
   line: {

@@ -21,17 +21,17 @@ const Start = (props) => {
       }}
     >
       <View style={styles.container3}>
-        <Text>Enter Player 1:</Text>
+        <Text style={styles.textContainer}>Enter Player 1:</Text>
         <TextInput
           style={styles.input}
           onChangeText={(value) => setName1(value)}
         />
-        <Text>Enter Player 2:</Text>
+        <Text style={styles.textContainer}>Enter Player 2:</Text>
         <TextInput
           style={styles.input}
           onChangeText={(value) => setName2(value)}
         />
-        <Text>Enter Max Score:</Text>
+        <Text style={styles.textContainer}>Enter Max Score:</Text>
         <TextInput
           style={styles.input}
           keyboardType="number-pad"
@@ -65,6 +65,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     height: 700,
+  },
+  textContainer: {
+    fontFamily: "monospace",
   },
 });
 export default Start;

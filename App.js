@@ -11,12 +11,18 @@ import {
   TextInput,
 } from "react-native";
 import Start from "./screens/Start";
-import Game from "./screens/Game";
 
 export default function App() {
   return (
     <View>
-      <Text style={{ textAlign: "center", fontSize: 25, marginTop: 40 }}>
+      <Text
+        style={{
+          textAlign: "center",
+          fontSize: 25,
+          marginTop: 40,
+          fontFamily: "serif",
+        }}
+      >
         Rock Paper Scissors
       </Text>
       <Start />
