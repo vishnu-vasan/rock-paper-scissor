@@ -4,51 +4,52 @@ import {
   View,
   Button,
   TouchableOpacity,
-  Dimensions, 
+  Dimensions,
   TouchableHighlight,
   Image,
   Text,
 } from "react-native";
 
 export default function App() {
-  const sample_alert = () => {
-    alert("Tapped the button");
+  const sample_alert = (weapon, id) => {
+    if (weapon == "Rock") alert("Player" + id + " Pressed on Rock");
+    if (weapon == "Paper") alert("Player" + id + " Pressed on Paper");
+    if (weapon == "Scissor") alert("Player" + id + " Pressed on Scissor");
   };
   return (
     <View>
       <View style={styles.container}>
-      <Text>{'Player 2\n'}</Text>
-        <TouchableOpacity onPress={sample_alert}>
+        <Text>{"Player 2\n"}</Text>
+        <TouchableOpacity onPress={sample_alert.bind(this, "Rock", "2")}>
           <Image source={require("./assets/rock.png")} />
         </TouchableOpacity>
-        <TouchableOpacity onPress={sample_alert}>
+        <TouchableOpacity onPress={sample_alert.bind(this, "Paper", "2")}>
           <Image source={require("./assets/paper.png")} />
         </TouchableOpacity>
-        <TouchableOpacity onPress={sample_alert}>
+        <TouchableOpacity onPress={sample_alert.bind(this, "Scissor", "2")}>
           <Image source={require("./assets/scissors.png")} />
         </TouchableOpacity>
       </View>
-      
-      <View style={styles.line}/>
+
+      <View style={styles.line} />
       <Text>Score</Text>
 
-      <TouchableHighlight style = {styles.circle}>
-      <Text>{'10\n15'}</Text>
+      <TouchableHighlight style={styles.circle}>
+        <Text>{"10\n15"}</Text>
       </TouchableHighlight>
 
       <View style={styles.container1}>
-      <Text>{'Player 1'}</Text>
-        <TouchableOpacity onPress={sample_alert}>
+        <Text>{"Player 1"}</Text>
+        <TouchableOpacity onPress={sample_alert.bind(this, "Rock", "1")}>
           <Image source={require("./assets/rock.png")} />
         </TouchableOpacity>
-        <TouchableOpacity onPress={sample_alert}>
+        <TouchableOpacity onPress={sample_alert.bind(this, "Paper", "1")}>
           <Image source={require("./assets/paper.png")} />
         </TouchableOpacity>
-        <TouchableOpacity onPress={sample_alert}>
+        <TouchableOpacity onPress={sample_alert.bind(this, "Scissor", "1")}>
           <Image source={require("./assets/scissors.png")} />
         </TouchableOpacity>
       </View>
-      
     </View>
   );
 }
@@ -72,15 +73,15 @@ const styles = StyleSheet.create({
     borderRadius: 75,
     width: 150,
     height: 150,
-    backgroundColor:'#87ceeb',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginLeft: Dimensions.get('window').width * 0.3,
+    backgroundColor: "#87ceeb",
+    justifyContent: "center",
+    alignItems: "center",
+    marginLeft: Dimensions.get("window").width * 0.3,
     marginTop: -90,
   },
   line: {
-    borderBottomColor: 'black',
+    borderBottomColor: "black",
     borderBottomWidth: 2,
-    marginTop:250,
+    marginTop: 250,
   },
 });
