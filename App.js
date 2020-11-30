@@ -4,7 +4,10 @@ import {
   View,
   Button,
   TouchableOpacity,
+  Dimensions, 
+  TouchableHighlight,
   Image,
+  Text,
 } from "react-native";
 
 export default function App() {
@@ -14,6 +17,7 @@ export default function App() {
   return (
     <View>
       <View style={styles.container}>
+      <Text>{'Player 2\n'}</Text>
         <TouchableOpacity onPress={sample_alert}>
           <Image source={require("./assets/rock.png")} />
         </TouchableOpacity>
@@ -24,7 +28,16 @@ export default function App() {
           <Image source={require("./assets/scissors.png")} />
         </TouchableOpacity>
       </View>
+      
+      <View style={styles.line}/>
+      <Text>Score</Text>
+
+      <TouchableHighlight style = {styles.circle}>
+      <Text>{'10\n15'}</Text>
+      </TouchableHighlight>
+
       <View style={styles.container1}>
+      <Text>{'Player 1'}</Text>
         <TouchableOpacity onPress={sample_alert}>
           <Image source={require("./assets/rock.png")} />
         </TouchableOpacity>
@@ -35,6 +48,7 @@ export default function App() {
           <Image source={require("./assets/scissors.png")} />
         </TouchableOpacity>
       </View>
+      
     </View>
   );
 }
@@ -51,7 +65,22 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-around",
-    height: 1100,
+    height: 500,
     borderColor: "black",
+  },
+  circle: {
+    borderRadius: 75,
+    width: 150,
+    height: 150,
+    backgroundColor:'#87ceeb',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: Dimensions.get('window').width * 0.3,
+    marginTop: -90,
+  },
+  line: {
+    borderBottomColor: 'black',
+    borderBottomWidth: 2,
+    marginTop:250,
   },
 });
