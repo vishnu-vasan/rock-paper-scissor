@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import {
   StyleSheet,
   View,
@@ -7,40 +7,81 @@ import {
   Dimensions,
   TouchableHighlight,
   Image,
-  BackHandler,
   Text,
 } from "react-native";
 
 export default function App() {
   const [player1Score, setPlayer1Score] = useState(0);
   const [player2Score, setPlayer2Score] = useState(0);
+  // const [player1Input, setPlayer1Input] = useState();
+  // const [player2Input, setPlayer2Input] = useState();
+  const player1Input = useRef("");
+  const player2Input = useRef("");
 
-  const sample_alert = (weapon, id) => {
-    if (weapon == "Rock") alert("Player" + id + " Pressed on Rock");
-    if (weapon == "Paper") alert("Player" + id + " Pressed on Paper");
-    if (weapon == "Scissor") alert("Player" + id + " Pressed on Scissor");
-    if (id == 1) {
-      setPlayer1Score((player1Score) => player1Score + 1);
+  const input_press_1 = (weapon) => {
+    player1Input.current = weapon;
+  };
+  const input_press_2 = (weapon) => {
+    player2Input.current = weapon;
+    if (player2Input !== undefined) {
+      calculate_point();
     }
-    if (id == 2) {
-      setPlayer2Score((player2Score) => player2Score + 1);
+  };
+
+  const calculate_point = () => {
+    if (player1Input.current === "Rock") {
+      if (player2Input.current === "Paper") {
+        setPlayer2Score((player2Score) => player2Score + 1);
+      }
+      if (player2Input.current === "Scissor") {
+        setPlayer1Score((player1Score) => player1Score + 1);
+      }
+      if (player2Input.current === player1Input.current) {
+        alert("No points this Round!");
+      }
+      player1Input.current = "";
+      player2Input.current = "";
+    }
+    if (player1Input.current === "Paper") {
+      if (player2Input.current == player1Input.current) {
+        alert("No points this Round!");
+      } else if (player2Input.current === "Rock") {
+        setPlayer1Score((player1Score) => player1Score + 1);
+      } else if (player2Input.current === "Scissor") {
+        setPlayer2Score((player2Score) => player2Score + 1);
+      }
+      player1Input.current = "";
+      player2Input.current = "";
+    }
+    if (player1Input.current === "Scissor") {
+      if (player2Input.current == "Paper") {
+        setPlayer1Score((player1Score) => player1Score + 1);
+      } else if (player2Input.current === player1Input.current) {
+        alert("No points this Round!");
+      } else if (player2Input.current === "Rock") {
+        setPlayer2Score((player2Score) => player2Score + 1);
+      }
+      player1Input.current = "";
+      player2Input.current = "";
     }
   };
   const resetGameHandler = () => {
     setPlayer1Score(0);
     setPlayer2Score(0);
+    player1Input.current = "";
+    player2Input.current = "";
   };
   return (
-    <View style={styles.full}>
+    <View>
       <View style={styles.container}>
-        <Text>{"Player 2\n"}</Text>
-        <TouchableOpacity onPress={sample_alert.bind(this, "Rock", "2")}>
+        <Text>{"Player 1\n"}</Text>
+        <TouchableOpacity onPress={input_press_1.bind(this, "Rock")}>
           <Image source={require("./assets/rock.png")} />
         </TouchableOpacity>
-        <TouchableOpacity onPress={sample_alert.bind(this, "Paper", "2")}>
+        <TouchableOpacity onPress={input_press_1.bind(this, "Paper")}>
           <Image source={require("./assets/paper.png")} />
         </TouchableOpacity>
-        <TouchableOpacity onPress={sample_alert.bind(this, "Scissor", "2")}>
+        <TouchableOpacity onPress={input_press_1.bind(this, "Scissor")}>
           <Image source={require("./assets/scissors.png")} />
         </TouchableOpacity>
       </View>
@@ -56,18 +97,18 @@ export default function App() {
       </TouchableHighlight>
 
       <View style={styles.buttonContainer}>
-      <Button title="Restart" onPress={resetGameHandler} />
+        <Button title="Restart" onPress={resetGameHandler} />
       </View>
 
       <View style={styles.container1}>
-        <Text>{"Player 1"}</Text>
-        <TouchableOpacity onPress={sample_alert.bind(this, "Rock", "1")}>
+        <Text>{"Player 2"}</Text>
+        <TouchableOpacity onPress={input_press_2.bind(this, "Rock")}>
           <Image source={require("./assets/rock.png")} />
         </TouchableOpacity>
-        <TouchableOpacity onPress={sample_alert.bind(this, "Paper", "1")}>
+        <TouchableOpacity onPress={input_press_2.bind(this, "Paper")}>
           <Image source={require("./assets/paper.png")} />
         </TouchableOpacity>
-        <TouchableOpacity onPress={sample_alert.bind(this, "Scissor", "1")}>
+        <TouchableOpacity onPress={input_press_2.bind(this, "Scissor")}>
           <Image source={require("./assets/scissors.png")} />
         </TouchableOpacity>
       </View>
@@ -107,14 +148,11 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     borderRadius: 100,
-    borderColor: '#000',
+    borderColor: "#000",
     color: "#c717fc",
     marginTop: 10,
     marginLeft: -18,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  full: {
-    backgroundColor: '#fff',
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
