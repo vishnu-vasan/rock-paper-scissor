@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   View,
@@ -11,10 +11,23 @@ import {
 } from "react-native";
 
 export default function App() {
+  const [player1Score, setPlayer1Score] = useState(0);
+  const [player2Score, setPlayer2Score] = useState(0);
+
   const sample_alert = (weapon, id) => {
     if (weapon == "Rock") alert("Player" + id + " Pressed on Rock");
     if (weapon == "Paper") alert("Player" + id + " Pressed on Paper");
     if (weapon == "Scissor") alert("Player" + id + " Pressed on Scissor");
+    if (id == 1) {
+      setPlayer1Score((player1Score) => player1Score + 1);
+    }
+    if (id == 2) {
+      setPlayer2Score((player2Score) => player2Score + 1);
+    }
+  };
+  const resetGameHandler = () => {
+    setPlayer1Score(0);
+    setPlayer2Score(0);
   };
   return (
     <View>
@@ -35,9 +48,17 @@ export default function App() {
       <Text>Score</Text>
 
       <TouchableHighlight style={styles.circle}>
-        <Text>{"10\n15"}</Text>
+        <View>
+          <Text>{player1Score}</Text>
+          <Text>{player2Score}</Text>
+        </View>
       </TouchableHighlight>
 
+      <Button
+        style={styles.buttonContainer}
+        title="Restart"
+        onPress={resetGameHandler}
+      />
       <View style={styles.container1}>
         <Text>{"Player 1"}</Text>
         <TouchableOpacity onPress={sample_alert.bind(this, "Rock", "1")}>
@@ -66,7 +87,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-around",
-    height: 500,
+    height: 400,
     borderColor: "black",
   },
   circle: {
@@ -83,5 +104,13 @@ const styles = StyleSheet.create({
     borderBottomColor: "black",
     borderBottomWidth: 2,
     marginTop: 250,
+  },
+  buttonContainer: {
+    marginTop: 10,
+    width: 300,
+    maxWidth: "30%",
+    color: "#FE434C",
+    alignItems: "center",
+    borderRadius: 15,
   },
 });
