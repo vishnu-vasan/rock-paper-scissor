@@ -13,12 +13,16 @@ import {
 export default function App() {
   const [player1Score, setPlayer1Score] = useState(0);
   const [player2Score, setPlayer2Score] = useState(0);
-  // const [player1Input, setPlayer1Input] = useState();
-  // const [player2Input, setPlayer2Input] = useState();
+  const [numOfRounds, setNumOfRounds] = useState(1);
   const player1Input = useRef("");
   const player2Input = useRef("");
-
+  const rounds = useRef(5);
   const input_press_1 = (weapon) => {
+    setNumOfRounds((numOfRounds) => numOfRounds + 1);
+    if (numOfRounds > rounds.current) {
+      alert("Game Over\n" + "Number of Rounds played: " + rounds.current);
+      resetGameHandler();
+    }
     player1Input.current = weapon;
   };
   const input_press_2 = (weapon) => {
@@ -70,6 +74,7 @@ export default function App() {
     setPlayer2Score(0);
     player1Input.current = "";
     player2Input.current = "";
+    setNumOfRounds(0);
   };
   return (
     <View>
