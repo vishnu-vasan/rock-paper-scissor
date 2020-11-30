@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
-    height: 910,
+    height: 700,
   },
 });
 export default Start;

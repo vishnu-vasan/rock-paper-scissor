@@ -16,6 +16,9 @@ import Game from "./screens/Game";
 export default function App() {
   return (
     <View>
+      <Text style={{ textAlign: "center", fontSize: 25, marginTop: 40 }}>
+        Rock Paper Scissors
+      </Text>
       <Start />
     </View>
   );
