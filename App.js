@@ -7,6 +7,7 @@ import {
   Dimensions,
   TouchableHighlight,
   Image,
+  BackHandler,
   Text,
 } from "react-native";
 
@@ -30,7 +31,7 @@ export default function App() {
     setPlayer2Score(0);
   };
   return (
-    <View>
+    <View style={styles.full}>
       <View style={styles.container}>
         <Text>{"Player 2\n"}</Text>
         <TouchableOpacity onPress={sample_alert.bind(this, "Rock", "2")}>
@@ -54,11 +55,10 @@ export default function App() {
         </View>
       </TouchableHighlight>
 
-      <Button
-        style={styles.buttonContainer}
-        title="Restart"
-        onPress={resetGameHandler}
-      />
+      <View style={styles.buttonContainer}>
+      <Button title="Restart" onPress={resetGameHandler} />
+      </View>
+
       <View style={styles.container1}>
         <Text>{"Player 1"}</Text>
         <TouchableOpacity onPress={sample_alert.bind(this, "Rock", "1")}>
@@ -106,11 +106,15 @@ const styles = StyleSheet.create({
     marginTop: 250,
   },
   buttonContainer: {
+    borderRadius: 100,
+    borderColor: '#000',
+    color: "#c717fc",
     marginTop: 10,
-    width: 300,
-    maxWidth: "30%",
-    color: "#FE434C",
-    alignItems: "center",
-    borderRadius: 15,
+    marginLeft: -18,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  full: {
+    backgroundColor: '#fff',
   },
 });
