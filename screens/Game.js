@@ -7,8 +7,7 @@ import {
   Dimensions,
   TouchableHighlight,
   Image,
-  Text,
-  TextInput,
+  Text
 } from "react-native";
 
 const Game = (props) => {
@@ -31,9 +30,11 @@ const Game = (props) => {
   const win = () => {
     if (player1Score === props.maxScore - 1) {
       alert(props.player1 + " wins!!!");
+      resetGameHandler();
     }
     if (player2Score === props.maxScore - 1) {
       alert(props.player2 + " wins!!!");
+      resetGameHandler();
     }
   };
 
@@ -153,8 +154,9 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     borderColor: "#000",
     color: "#c717fc",
-    marginTop: 10,
-    marginLeft: -18,
+    marginTop: 20,
+    marginLeft: -10,
+    marginBottom: 20,
     justifyContent: "center",
     alignItems: "center",
   },

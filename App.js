@@ -1,14 +1,7 @@
-import React, { useRef, useState } from "react";
+import React from "react";
 import {
-  StyleSheet,
   View,
-  Button,
-  TouchableOpacity,
-  Dimensions,
-  TouchableHighlight,
-  Image,
-  Text,
-  TextInput,
+  Text
 } from "react-native";
 import Start from "./screens/Start";
 
@@ -30,4 +23,4 @@ export default function App() {
   );
 }
 
-const styles = StyleSheet.create({});
+
